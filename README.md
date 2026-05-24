@@ -170,3 +170,16 @@ Poniendo otra Ruta
 
 Poniendo en desactivado
 ![alt text](image-5.png)
+
+- Nucleo Tematico 4
+Creando categoria de prueba
+![alt text](image-6.png)
+
+Eliminando Categoria
+![alt text](image-7.png)
+
+Producto añadido
+![alt text](image-8.png)
+
+Producto Eliminado
+![alt text](image-9.png)
