@@ -48,15 +48,15 @@ class Categoria extends Model
     </div>
 
     <div class="bg-gray-950 p-6 rounded-xl border border-gray-800">
-        <h3 class="text-lg font-bold text-white mb-2"><i class="fas fa-terminal text-emerald-500 mr-2"></i> Ejemplo Práctico: Simulador de Consultas Eloquent</h3>
-        <p class="text-xs text-gray-400 mb-4">Selecciona un comando ORM para simular la consulta que se enviaría a la base de datos y observar los datos relacionales devueltos:</p>
+        <h3 class="text-lg font-bold text-white mb-2"><i class="fas fa-terminal text-emerald-500 mr-2"></i> Ejemplo Práctico: Consultas Eloquent en Vivo</h3>
+        <p class="text-xs text-gray-400 mb-4">Selecciona un comando ORM para observar la consulta y los resultados reales devueltos desde la base de datos.</p>
         
         <div class="space-y-4">
             <div class="bg-gray-900 p-4 rounded-xl border border-gray-800">
                 <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Seleccionar Consulta Eloquent:</label>
                 <select id="eloquentSelect" onchange="simularQuery()" class="w-full bg-gray-950 border border-gray-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-red-500">
                     <option value="all">Categoria::all(); (Listar todo)</option>
-                    <option value="with">Categoria::with('productos')->get(); (Carga Relacional)</option>
+                    <option value="with">Categoria::with('productos')->get(); (Carga relacional)</option>
                 </select>
             </div>
 
@@ -66,38 +66,31 @@ class Categoria extends Model
                     <div id="queryCode" class="text-blue-400 font-bold">Categoria::all();</div>
                 </div>
                 <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 font-mono text-xs">
-                    <span class="text-gray-500 block text-[10px] mb-1 font-bold">RESULTADO COLECCIÓN JSON SIMULADO:</span>
-                    <pre id="jsonResult" class="text-emerald-400 text-[11px] overflow-x-auto">[{"id": 1, "nombre": "Programación Backend"}]</pre>
+                    <span class="text-gray-500 block text-[10px] mb-1 font-bold">RESULTADO COLECCIÓN JSON REAL:</span>
+                    <pre id="jsonResult" class="text-emerald-400 text-[11px] overflow-x-auto"></pre>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        const datosAll = {!! $categoriasAll->toJson() !!};
+        const datosWith = {!! $categoriasWithProductos->toJson() !!};
+
         function simularQuery() {
             const op = document.getElementById('eloquentSelect').value;
             const code = document.getElementById('queryCode');
             const json = document.getElementById('jsonResult');
 
-            if(op === 'all') {
+            if (op === 'all') {
                 code.innerText = "Categoria::all();";
-                json.innerText = JSON.stringify([
-                    {id: 1, nombre: "Desarrollo Web", descripcion: "Teoría de Frameworks"}
-                ], null, 2);
+                json.innerText = JSON.stringify(datosAll, null, 2);
             } else {
                 code.innerText = "Categoria::with('productos')->get();";
-                json.innerText = JSON.stringify([
-                    {
-                        id: 1, 
-                        nombre: "Desarrollo Web", 
-                        productos: [
-                            {id: 101, titulo: "Manual Laravel 12", precio: 0}
-                        ]
-                    }
-                ], null, 2);
+                json.innerText = JSON.stringify(datosWith, null, 2);
             }
         }
-        // Inicializar
+
         simularQuery();
     </script>
 @endsection

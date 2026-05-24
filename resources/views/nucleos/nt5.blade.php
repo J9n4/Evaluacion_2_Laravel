@@ -43,67 +43,56 @@
     </div>
 
     <div class="bg-gray-950 p-6 rounded-xl border border-gray-800">
-        <h3 class="text-lg font-bold text-white mb-2"><i class="fas fa-check-circle text-emerald-500 mr-2"></i> Ejemplo Práctico: Demo de Captura de Errores de Validación</h3>
-        <p class="text-xs text-gray-400 mb-4">Ingresa datos inválidos (ej. deja campos vacíos o pon un correo sin formato) para ver cómo reacciona en vivo el sistema de alertas de Laravel:</p>
+        <h3 class="text-lg font-bold text-white mb-2"><i class="fas fa-check-circle text-emerald-500 mr-2"></i> Ejemplo Práctico: Captura de Errores de Validación</h3>
+        <p class="text-xs text-gray-400 mb-4">Envía el formulario para que Laravel valide el contenido en el servidor con <code class="text-red-400 font-mono">$request->validate()</code>. Se mostrará un mensaje de éxito cuando los datos sean correctos.</p>
 
         <div class="bg-gray-900 p-5 rounded-xl border border-gray-800 max-w-md mx-auto">
-            <form onsubmit="validarFormularioSimulado(event)" class="space-y-4">
+            @if(session('success'))
+                <div class="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500 text-emerald-300 text-xs font-semibold">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('nt5.submit') }}" class="space-y-4">
+                @csrf
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">Nombre completo:</label>
+                    <input type="text" name="nombre" value="{{ old('nombre') }}" class="w-full bg-gray-950 border {{ $errors->has('nombre') ? 'border-red-500' : 'border-gray-700' }} rounded p-2 text-xs text-white focus:outline-none focus:border-red-500" placeholder="Ej. Ana Pérez">
+                    @error('nombre')
+                        <p class="text-[11px] text-red-500 font-mono mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <div>
                     <label class="block text-xs font-bold text-gray-400 mb-1">Correo Electrónico:</label>
-                    <input type="text" id="valEmail" class="w-full bg-gray-950 border border-gray-700 rounded p-2 text-xs text-white focus:outline-none focus:border-red-500" placeholder="ejemplo@unach.cl">
-                    <span id="errorEmail" class="text-[11px] text-red-500 font-mono mt-1 hidden">El campo email es obligatorio y debe ser válido.</span>
+                    <input type="email" name="email" value="{{ old('email') }}" class="w-full bg-gray-950 border {{ $errors->has('email') ? 'border-red-500' : 'border-gray-700' }} rounded p-2 text-xs text-white focus:outline-none focus:border-red-500" placeholder="ejemplo@unach.cl">
+                    @error('email')
+                        <p class="text-[11px] text-red-500 font-mono mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-gray-400 mb-1">Contraseña (Mínimo 6 caracteres):</label>
-                    <input type="password" id="valPass" class="w-full bg-gray-950 border border-gray-700 rounded p-2 text-xs text-white focus:outline-none focus:border-red-500">
-                    <span id="errorPass" class="text-[11px] text-red-500 font-mono mt-1 hidden">La contraseña debe tener al menos 6 caracteres.</span>
+                    <input type="password" name="password" class="w-full bg-gray-950 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-700' }} rounded p-2 text-xs text-white focus:outline-none focus:border-red-500">
+                    @error('password')
+                        <p class="text-[11px] text-red-500 font-mono mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
-                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-2 rounded transition-colors">
-                    Simular Envío ($request->validate())
-                </button>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">Confirmar contraseña:</label>
+                    <input type="password" name="password_confirmation" class="w-full bg-gray-950 border border-gray-700 rounded p-2 text-xs text-white focus:outline-none focus:border-red-500" placeholder="Repite tu contraseña">
+                </div>
+
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-2 rounded transition-colors">Enviar y Validar</button>
             </form>
-            
-            <div id="exitoMsg" class="mt-4 p-2 bg-emerald-500/10 border border-emerald-500/30 rounded text-emerald-400 text-center font-bold text-xs hidden">
-                ¡Validación aprobada! Datos listos para el Model::create().
-            </div>
+
+            @if($errors->any())
+                <div class="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500 text-red-300 text-xs font-semibold">
+                    Por favor corrige los errores marcados en el formulario.
+                </div>
+            @endif
         </div>
     </div>
-
-    <script>
-        function validarFormularioSimulado(e) {
-            e.preventDefault();
-            const email = document.getElementById('valEmail').value;
-            const pass = document.getElementById('valPass').value;
-            
-            const errEmail = document.getElementById('errorEmail');
-            const errPass = document.getElementById('errorPass');
-            const exito = document.getElementById('exitoMsg');
-
-            let tieneError = false;
-
-            // Simulación de regla 'required' y 'email'
-            if(!email || !email.includes('@')) {
-                errEmail.classList.remove('hidden');
-                tieneError = true;
-            } else {
-                errEmail.classList.add('hidden');
-            }
-
-            // Simulación de regla 'min:6'
-            if(!pass || pass.length < 6) {
-                errPass.classList.remove('hidden');
-                tieneError = true;
-            } else {
-                errPass.classList.add('hidden');
-            }
-
-            if(!tieneError) {
-                exito.classList.remove('hidden');
-            } else {
-                exito.classList.add('hidden');
-            }
-        }
-    </script>
 @endsection
