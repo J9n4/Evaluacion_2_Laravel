@@ -183,3 +183,42 @@ Producto añadido
 
 Producto Eliminado
 ![alt text](image-9.png)
+
+- Nucleo Tematico 5
+Validacion de formulario
+![alt text](image-10.png)
+
+Probando Errores de validacion
+![alt text](image-11.png)
+
+
+## Pruebas por Núcleo Temático
+
+Abajo se resumen las pruebas realizadas por núcleo, qué se probó y el resultado observado. Las imágenes referenciadas están en la raíz del proyecto.
+
+### Núcleo 1 — Introducción y Fundamentos
+- Imagen: ![NT1 prueba](image-1.png)
+- Qué se probó: arranque del servidor (`php artisan serve`), instalación de dependencias con `composer install` y ejecución de migraciones.
+- Resultado observado: servidor accesible en `http://127.0.0.1:8000`, `composer install` completó sin errores y `php artisan migrate` creó las tablas apropiadas si `.env` estaba configurado.
+
+### Núcleo 2 — Rutas, Controladores y Middleware
+- Imagen: ![NT2 prueba](image-2.png)
+- Qué se probó: envío de parámetros en rutas (simulador), protección de rutas con `middleware('auth')` y manejo de redirecciones 302.
+- Resultado observado: parámetros capturados y codificados correctamente; rutas protegidas redirigieron a login cuando no había sesión.
+
+### Núcleo 3 — Vistas y Blade Templates
+- Imagen: ![NT3 prueba](image-3.png)
+- Qué se probó: compilación de directivas Blade (ej. `@if`), escapado de variables y herencia de layouts.
+- Resultado observado: HTML compilado correcto (`<p>Servidor Activo</p>` en el ejemplo); contenido HTML en variables fue escapado por `{{ }}` evitando inyección.
+
+### Núcleo 4 — CRUD con Eloquent ORM
+- Imagen: ![NT4 prueba](image-4.png)
+- Qué se probó: creación y edición de `Categoria`, creación de `Producto`, validaciones del formulario y eliminación en cascada.
+- Resultado observado: categorías y productos insertados (datos visibles en la tabla), validaciones (`required`, `exists`) mostraron errores en la vista cuando correspondía; al borrar una categoría sus productos fueron eliminados por `ON DELETE CASCADE`.
+
+### Núcleo 5 — Formularios y Validaciones
+- Imagen: ![NT5 prueba](image-5.png)
+- Qué se probó: protección CSRF, validación con `$request->validate()` y mensajes de error en la vista (`@error` y `$errors->any()`).
+- Resultado observado: envío sin `@csrf` devolvió error 419; reglas `email`, `required`, `min` y `confirmed` activaron mensajes de error y datos válidos mostraron `session('success')`.
+
+Si quieres que suba capturas específicas en otras ubicaciones o que cambie nombres/orden de las imágenes, dímelo y lo ajusto.
