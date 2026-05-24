@@ -5,9 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Form Request para crear una nueva categoría.
- * Centraliza la validación fuera del controlador.
- * Ventajas: código limpio, reutilizable, fácil de mantener
+    * Form Request para crear una nueva categoría.
  */
 class StoreCategoriaRequest extends FormRequest
 {

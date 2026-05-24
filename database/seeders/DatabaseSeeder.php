@@ -26,19 +26,19 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Crear 5 categorías con sus productos asociados
+       
         Categoria::factory(5)
             ->has(Producto::factory(3))
             ->create();
 
-        // Crear categoría específica sin descripción
+        
         $categoria = Categoria::factory()
             ->withoutDescription()
             ->create([
                 'nombre' => 'Desarrollo Web',
             ]);
 
-        // Crear productos específicos en esa categoría
+        
         Producto::factory(2)
             ->inCategory($categoria)
             ->withPrice(99.99)
