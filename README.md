@@ -155,3 +155,18 @@ Nota: si truncas tablas manualmente recuerda desactivar y reactivar `FOREIGN_KEY
 
 - Nucleo Tematico 1
 ![alt text](image.png)
+
+Usando la otra opcion
+![alt text](image-1.png)
+
+- Nucleo Tematico 2
+![alt text](image-2.png)
+
+Poniendo otra Ruta
+![alt text](image-3.png)
+
+- Nucleo Tematico 3
+![alt text](image-4.png)
+
+Poniendo en desactivado
+![alt text](image-5.png)
