@@ -88,7 +88,6 @@ Luego abre el navegador en `http://127.0.0.1:8000`.
 ## SQL: Crear tablas y poblar datos de prueba (MySQL)
 
 ```sql
--- Crear tabla categorias
 CREATE TABLE IF NOT EXISTS `categorias` (
 	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`nombre` VARCHAR(255) NOT NULL,
@@ -97,7 +96,6 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 	`updated_at` TIMESTAMP NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Crear tabla productos
 CREATE TABLE IF NOT EXISTS `productos` (
 	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`categoria_id` BIGINT UNSIGNED NOT NULL,
@@ -108,7 +106,6 @@ CREATE TABLE IF NOT EXISTS `productos` (
 	CONSTRAINT `fk_producto_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `categorias`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Datos de prueba (IDs fijos para ejemplo)
 INSERT INTO `categorias` (`id`,`nombre`,`descripcion`,`created_at`,`updated_at`) VALUES
 (1,'Desarrollo Web','Cursos y proyectos con Laravel y bases de datos relacionales',NOW(),NOW()),
 (2,'Bases de Datos','Ejercicios y ejemplos de SQL',NOW(),NOW()),
@@ -119,12 +116,34 @@ INSERT INTO `productos` (`categoria_id`,`titulo`,`precio`,`created_at`,`updated_
 (1,'Curso Laravel Avanzado',199.99,NOW(),NOW()),
 (2,'Introducción a SQL',29.99,NOW(),NOW());
 
--- Si ejecutas en una BD con datos previos, puedes truncar las tablas primero:
--- SET FOREIGN_KEY_CHECKS=0;
--- TRUNCATE TABLE productos;
--- TRUNCATE TABLE categorias;
--- SET FOREIGN_KEY_CHECKS=1;
 ```
+
+### Ejecutar este bloque SQL
+
+1) Usando el cliente `mysql` (línea de comandos)
+
+Guarda el SQL en un archivo, por ejemplo `nt4_seed.sql`, y luego ejecuta:
+
+```bash
+# (opcional) crear la base de datos si no existe
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS nombre_basedatos CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+
+# Importar el archivo SQL en la base de datos
+mysql -u usuario -p nombre_basedatos < nt4_seed.sql
+
+# Alternativa: entrar al cliente y usar SOURCE
+mysql -u usuario -p nombre_basedatos
+mysql> SOURCE /ruta/al/nt4_seed.sql;
+```
+
+2) Usando phpMyAdmin
+
+- Accede a phpMyAdmin en tu navegador e inicia sesión.
+- Selecciona la base de datos `nombre_basedatos` en la columna izquierda (o créala desde el panel "Bases de datos").
+- Ve a la pestaña "SQL" y pega el contenido del bloque SQL, o utiliza la pestaña "Importar" y sube el archivo `nt4_seed.sql`.
+- Ejecuta la consulta/importación. phpMyAdmin mostrará mensajes de éxito o errores.
+
+Nota: si truncas tablas manualmente recuerda desactivar y reactivar `FOREIGN_KEY_CHECKS` como se muestra arriba.
 
 ## Notas
 
