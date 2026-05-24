@@ -150,3 +150,8 @@ Nota: si truncas tablas manualmente recuerda desactivar y reactivar `FOREIGN_KEY
 - Laravel usa Composer para gestionar dependencias PHP.
 - `php artisan` es la herramienta de línea de comandos para migraciones, seeders y servidor.
 - El archivo `.env` contiene la configuración del entorno y no debe compartirse.
+
+# Evidencia Visual 
+
+- Nucleo Tematico 1
+![alt text](image.png)
