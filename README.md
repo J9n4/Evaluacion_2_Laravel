@@ -1,8 +1,8 @@
 # Evaluacion_2_Laravel
-
+- Integrantes Del grupo: Rafael Aruti y Jonathan Huaylla
 ## Introducción
 
-Este proyecto es una aplicación Laravel que utiliza Eloquent ORM, migraciones, seeders, validación y formularios Blade. A continuación se describe cómo instalar Laravel y sus dependencias para ejecutar la aplicación localmente.
+Este proyecto es una aplicación Laravel que utiliza e explica los conceptos fundamentales tales como: Eloquent ORM, migraciones, seeders, validación y formularios Blade. Para cumplir con los requerimientos de nuestra segunda evaluacion de nuestro curso de laravel.
 
 ## Requisitos previos
 
