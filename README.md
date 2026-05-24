@@ -8,12 +8,14 @@ Este proyecto es una aplicación Laravel que utiliza Eloquent ORM, migraciones, 
 
 - PHP 8.1 o superior
 - Composer
-- Una base de datos compatible (MySQL, MariaDB, SQLite, PostgreSQL)
+- Una base de datos tal sea: MySQL, MariaDB, SQLite, PostgreSQL
 - Node.js y npm (opcional para activos y Vite)
 
 ## Instalación de Laravel y dependencias
 
 1. Clona el repositorio o descarga el proyecto.
+
+- Esto se puede hacer desde el mismo github copiando la URL o por la aplicacion Github Desktop
 
 2. En la carpeta del proyecto, instala dependencias PHP con Composer:
 
