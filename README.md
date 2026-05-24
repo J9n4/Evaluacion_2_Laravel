@@ -191,34 +191,16 @@ Validacion de formulario
 Probando Errores de validacion
 ![alt text](image-11.png)
 
+---
 
-## Pruebas por Núcleo Temático
+## Resumen de pruebas por Núcleo (después de las imágenes)
 
-Abajo se resumen las pruebas realizadas por núcleo, qué se probó y el resultado observado. Las imágenes referenciadas están en la raíz del proyecto.
+- **Núcleo 1:** Se probó `composer install`, `php artisan serve` y `php artisan migrate`. Resultado: dependencias instaladas, servidor accesible en `http://127.0.0.1:8000` y tablas creadas correctamente cuando `.env` estaba configurado.
 
-### Núcleo 1 — Introducción y Fundamentos
-- Imagen: ![NT1 prueba](image-1.png)
-- Qué se probó: arranque del servidor (`php artisan serve`), instalación de dependencias con `composer install` y ejecución de migraciones.
-- Resultado observado: servidor accesible en `http://127.0.0.1:8000`, `composer install` completó sin errores y `php artisan migrate` creó las tablas apropiadas si `.env` estaba configurado.
+- **Núcleo 2:** Se probó el paso de parámetros en rutas (ej. `unach`,`Umas`) y rutas protegidas con `middleware('auth')`. Resultado: parámetros capturados/encodificados correctamente; rutas protegidas redirigieron (302) al login cuando no había sesión.
 
-### Núcleo 2 — Rutas, Controladores y Middleware
-- Imagen: ![NT2 prueba](image-2.png)
-- Qué se probó: envío de parámetros en rutas (simulador), protección de rutas con `middleware('auth')` y manejo de redirecciones 302.
-- Resultado observado: parámetros capturados y codificados correctamente; rutas protegidas redirigieron a login cuando no había sesión.
+- **Núcleo 3:** Se probó la compilación de directivas Blade (`@if`) y el escapado de variables. Resultado: HTML compilado correcto (`<p>Servidor Activo</p>` en la demo); variables con HTML se escaparon evitando inyección.
 
-### Núcleo 3 — Vistas y Blade Templates
-- Imagen: ![NT3 prueba](image-3.png)
-- Qué se probó: compilación de directivas Blade (ej. `@if`), escapado de variables y herencia de layouts.
-- Resultado observado: HTML compilado correcto (`<p>Servidor Activo</p>` en el ejemplo); contenido HTML en variables fue escapado por `{{ }}` evitando inyección.
+- **Núcleo 4:** Se probó crear/editar `Categoria`, crear `Producto`, validaciones y eliminación en cascada. Resultado: categoría `Desarrollo Web` insertada; producto `Manual Laravel 12` insertado; envío con `nombre` vacío disparó validación `required`; borrar categoría eliminó sus productos (ON DELETE CASCADE).
 
-### Núcleo 4 — CRUD con Eloquent ORM
-- Imagen: ![NT4 prueba](image-4.png)
-- Qué se probó: creación y edición de `Categoria`, creación de `Producto`, validaciones del formulario y eliminación en cascada.
-- Resultado observado: categorías y productos insertados (datos visibles en la tabla), validaciones (`required`, `exists`) mostraron errores en la vista cuando correspondía; al borrar una categoría sus productos fueron eliminados por `ON DELETE CASCADE`.
-
-### Núcleo 5 — Formularios y Validaciones
-- Imagen: ![NT5 prueba](image-5.png)
-- Qué se probó: protección CSRF, validación con `$request->validate()` y mensajes de error en la vista (`@error` y `$errors->any()`).
-- Resultado observado: envío sin `@csrf` devolvió error 419; reglas `email`, `required`, `min` y `confirmed` activaron mensajes de error y datos válidos mostraron `session('success')`.
-
-Si quieres que suba capturas específicas en otras ubicaciones o que cambie nombres/orden de las imágenes, dímelo y lo ajusto.
+- **Núcleo 5:** Se probó protección CSRF y validaciones (`required`, `email`, `min`, `confirmed`) con `$request->validate()`. Resultado: envío sin `@csrf` devolvió error 419; email inválido y confirmación de password activaron mensajes; datos válidos mostraron `session('success')`.
