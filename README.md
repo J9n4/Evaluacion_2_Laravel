@@ -154,42 +154,42 @@ Nota: si truncas tablas manualmente recuerda desactivar y reactivar `FOREIGN_KEY
 # Evidencia Visual 
 
 - Nucleo Tematico 1
-![alt text](image.png)
+![alt text](docs/images/image.png)
 
 Usando la otra opcion
-![alt text](image-1.png)
+![alt text](docs/images/image-1.png)
 
 - Nucleo Tematico 2
-![alt text](image-2.png)
+![alt text](docs/images/image-2.png)
 
 Poniendo otra Ruta
-![alt text](image-3.png)
+![alt text](docs/images/image-3.png)
 
 - Nucleo Tematico 3
-![alt text](image-4.png)
+![alt text](docs/images/image-4.png)
 
 Poniendo en desactivado
-![alt text](image-5.png)
+![alt text](docs/images/image-5.png)
 
 - Nucleo Tematico 4
 Creando categoria de prueba
-![alt text](image-6.png)
+![alt text](docs/images/image-6.png)
 
 Eliminando Categoria
-![alt text](image-7.png)
+![alt text](docs/images/image-7.png)
 
 Producto añadido
-![alt text](image-8.png)
+![alt text](docs/images/image-8.png)
 
 Producto Eliminado
-![alt text](image-9.png)
+![alt text](docs/images/image-9.png)
 
 - Nucleo Tematico 5
 Validacion de formulario
-![alt text](image-10.png)
+![alt text](docs/images/image-10.png)
 
 Probando Errores de validacion
-![alt text](image-11.png)
+![alt text](docs/images/image-11.png)
 
 ---
 
