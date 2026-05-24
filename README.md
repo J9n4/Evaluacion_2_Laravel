@@ -85,6 +85,47 @@ php artisan serve
 
 Luego abre el navegador en `http://127.0.0.1:8000`.
 
+## SQL: Crear tablas y poblar datos de prueba (MySQL)
+
+```sql
+-- Crear tabla categorias
+CREATE TABLE IF NOT EXISTS `categorias` (
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`nombre` VARCHAR(255) NOT NULL,
+	`descripcion` TEXT NULL,
+	`created_at` TIMESTAMP NULL,
+	`updated_at` TIMESTAMP NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Crear tabla productos
+CREATE TABLE IF NOT EXISTS `productos` (
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`categoria_id` BIGINT UNSIGNED NOT NULL,
+	`titulo` VARCHAR(255) NOT NULL,
+	`precio` DECIMAL(8,2) NOT NULL DEFAULT 0.00,
+	`created_at` TIMESTAMP NULL,
+	`updated_at` TIMESTAMP NULL,
+	CONSTRAINT `fk_producto_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `categorias`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Datos de prueba (IDs fijos para ejemplo)
+INSERT INTO `categorias` (`id`,`nombre`,`descripcion`,`created_at`,`updated_at`) VALUES
+(1,'Desarrollo Web','Cursos y proyectos con Laravel y bases de datos relacionales',NOW(),NOW()),
+(2,'Bases de Datos','Ejercicios y ejemplos de SQL',NOW(),NOW()),
+(3,'Testing','Pruebas y PHPUnit',NOW(),NOW());
+
+INSERT INTO `productos` (`categoria_id`,`titulo`,`precio`,`created_at`,`updated_at`) VALUES
+(1,'Manual Laravel 12',0.00,NOW(),NOW()),
+(1,'Curso Laravel Avanzado',199.99,NOW(),NOW()),
+(2,'Introducción a SQL',29.99,NOW(),NOW());
+
+-- Si ejecutas en una BD con datos previos, puedes truncar las tablas primero:
+-- SET FOREIGN_KEY_CHECKS=0;
+-- TRUNCATE TABLE productos;
+-- TRUNCATE TABLE categorias;
+-- SET FOREIGN_KEY_CHECKS=1;
+```
+
 ## Notas
 
 - Laravel usa Composer para gestionar dependencias PHP.
